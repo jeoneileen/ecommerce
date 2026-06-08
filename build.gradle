@@ -1,0 +1,57 @@
+plugins {
+	id 'java'   // Java 컴파일 및 빌드 기능 활성화
+	id 'org.springframework.boot' version '3.4.3'   // 	bootJar, bootRun 등 Spring Boot 전용 태스크 제공
+	id 'io.spring.dependency-management' version '1.1.7'    // Spring Boot BOM(Bill of Materials) 기반으로 버전 자동 관리
+}
+
+group = 'com.ecommerce'
+version = '0.0.1-SNAPSHOT'  // 개발 중인 버전
+
+java {
+	toolchain {// 어떤 환경에서 빌드하든 Java 17을 강제 사용하도록 고정
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+
+	// Spring Boot Core
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// JPA + MySQL
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+
+	// Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// 토스페이먼츠 SDK
+//	implementation 'com.github.tosspayments:tosspayments-sdk-java:1.0.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

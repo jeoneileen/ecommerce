@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: ecommerce
+
+  # DB 연결
+  datasource:
+    url: jdbc:mysql://localhost:3306/ecommerce?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: root
+    password: 0830
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    open-in-view: false
+
+jwt:
+  secret: ecommerce-jwt-secret-key-at-least-32-characters-long
+  expiration: 86400000   # 24시간 (밀리초)
+
+server:
+  port: 8085
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    com.ecommerce: DEBUG
